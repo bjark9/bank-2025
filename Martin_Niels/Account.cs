@@ -9,7 +9,12 @@ class Account
 
     public void Transaction(long amount, bool transaction = true) // If transaction = true -> add montant
     {
+        // Maybe add function for when balance - amount < 0 ?
+        if (transaction == false && (Balance - amount <0))
+        {
+            Console.WriteLine("You don't have enough money on your bank account.");
+            return;
+        }
         Balance += (transaction) ? amount : -amount;
     }
-    // Maybe add function for when balance - amount < 0 ?
 }

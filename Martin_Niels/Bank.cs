@@ -1,3 +1,5 @@
+// test
+
 class Bank
 {
     public required string NameBank; // Public properties start with capital letter

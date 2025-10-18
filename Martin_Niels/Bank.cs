@@ -1,4 +1,4 @@
-namespace BankApplication
+namespace BankApplication_Personnel
 {
     class Bank
     {
@@ -6,11 +6,11 @@ namespace BankApplication
         private List<long> usedCheckingAccountNumbers = new List<long>(); // Use List because don't need to know size when instantiating it.
         private List<long> usedSavingsAccountNumbers = new List<long>();
         private List<long> usedIBANNumbers = new List<long>(); // Use List because don't need to know size when instantiating it.
-        private List<Account> accounts = new List<Account>();
+        private List<BankApplication_Personnel.Account> accounts = new List<BankApplication_Personnel.Account>();
         private Random random = new Random();   // Need to be here bc ensure there's only one random generator used by the entire Bank class instance. 
                                                 // C# seeds random instance on time (in milliseconds), so if you create multiple Random objects
                                                 // In quick succession, all those instances might get the same seed.
-        public Account CreateAccount(string name, string firstName, int balance = 1000)
+        public BankApplication_Personnel.Account CreateAccount(string name, string firstName, int balance = 1000)
         {
             // CHECKING ACCOUNT
             // Random CheckingAccountNumber
@@ -47,9 +47,27 @@ namespace BankApplication
             IBAN = "BE" + IBAN;
 
             // Add all data to the account  
-            Account account = new Account { CheckingAccountNumber = numCheckingAccount, SavingAccountNumber = numSavingsAccount , CheckingAccBalance = 1000, SavingAccBalance = 1000, IBAN = IBAN, Name = name, FirstName = firstName };
+            BankApplication_Personnel.Account account = new BankApplication_Personnel.Account { CheckingAccountNumber = numCheckingAccount, SavingAccountNumber = numSavingsAccount, CheckingAccBalance = 1000, SavingAccBalance = 1000, IBAN = IBAN, Name = name, FirstName = firstName };
             accounts.Add(account);
             return account;
+        }
+    }
+}
+
+namespace BankApplication_Cours
+{
+    class Bank
+    {
+        public readonly Dictionary<string, Account> Accounts;
+        public required string Name;
+
+        public void AddAccount(Account account)
+        {
+            Accounts.Add(account.AccNumber, account); 
+        }
+        public void DeleteAccount(string number)
+        {
+            Accounts.Remove(number); // remove account by key
         }
     }
 }

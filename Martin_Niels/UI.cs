@@ -12,7 +12,7 @@ Console.WriteLine(account01.CreateAccount("Martin", "Niels").AccountNumber); // 
 // UI
 Console.WriteLine("What is the name of your bank?");
 string bankName = Console.ReadLine();
-Bank account00 = new Bank { NameBank = bankName };
+BankApplication_Personnel.Bank account00 = new BankApplication_Personnel.Bank { NameBank = bankName };
 Console.WriteLine("What is your name?");
 string userName = Console.ReadLine();
 Console.WriteLine("What is your first name?");

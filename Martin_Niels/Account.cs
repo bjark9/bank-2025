@@ -1,4 +1,4 @@
-namespace BankApplication
+namespace BankApplication_Personnel
 {
     class Account
     {
@@ -10,8 +10,8 @@ namespace BankApplication
         public required string IBAN { get; set; } // Alphanumeric
         public required string Name { get; set; }
         public required string FirstName { get; set; }
-        
-        public void Transaction(long amount, long accTypeNumber,bool transaction = true) // If transaction = true -> add montant
+
+        public void Transaction(long amount, long accTypeNumber, bool transaction = true) // If transaction = true -> add montant
         {
             long Balance = 0;
             if (accTypeNumber == CheckingAccountNumber)
@@ -38,6 +38,29 @@ namespace BankApplication
         public long SumOfAllAccountsBalance()
         {
             return (CheckingAccBalance + SavingAccBalance);
+        }
+    }
+}
+
+namespace BankApplication_Cours
+{
+    abstract class Account // Cette class va être la classe parente dont SavingsAccount et CurrentAccount vont hériter
+    {
+        public required string AccNumber { get; set; }
+        public double Balance { get; private set; }
+        public required BankApplication_Cours.Person Owner { get; set; }
+        public virtual void Withdraw(double amount)
+        {
+            Balance -= amount;
+        }
+        public virtual void Deposit(double amount)
+        {
+            Balance += amount;
+        }
+        abstract protected double CalculInterest();
+        public void ApplyInterest()
+        {
+            Balance += CalculInterest();
         }
     }
 }

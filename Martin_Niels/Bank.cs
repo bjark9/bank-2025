@@ -3,7 +3,8 @@ namespace BankApplication
     class Bank
     {
         public required string NameBank; // Public properties start with capital letter
-        private List<long> usedAccountNumbers = new List<long>(); // Use List because don't need to know size when instantiating it.
+        private List<long> usedCheckingAccountNumbers = new List<long>(); // Use List because don't need to know size when instantiating it.
+        private List<long> usedSavingsAccountNumbers = new List<long>();
         private List<long> usedIBANNumbers = new List<long>(); // Use List because don't need to know size when instantiating it.
         private List<Account> accounts = new List<Account>();
         private Random random = new Random();   // Need to be here bc ensure there's only one random generator used by the entire Bank class instance. 
@@ -11,16 +12,27 @@ namespace BankApplication
                                                 // In quick succession, all those instances might get the same seed.
         public Account CreateAccount(string name, string firstName, int balance = 1000)
         {
-            // Random accountNumber
+            // CHECKING ACCOUNT
+            // Random CheckingAccountNumber
             bool checkOver = false;
-            long numAccount = 0;
+            long numCheckingAccount = 0;
             do // Check if numAccount is in usedAccountNumbers
             {
-                numAccount = random.NextInt64(1000000000000000, 9999999999999999); // Random account number
-                checkOver = (usedAccountNumbers.Contains(numAccount)) ? true : false; // If contains numAccount -> checkOver = false (keep loop)
+                numCheckingAccount = random.NextInt64(1000000000000000, 9999999999999999); // Random account number
+                checkOver = (usedCheckingAccountNumbers.Contains(numCheckingAccount)) ? true : false; // If contains numAccount -> checkOver = false (keep loop)
             } while (checkOver); // 
 
-            usedAccountNumbers.Add(numAccount); // Add new account to list of used account numbers
+            usedCheckingAccountNumbers.Add(numCheckingAccount); // Add new account to list of used account numbers
+
+            // SAVINGS ACCOUNT
+            // Random SavingsAccountNumber
+            checkOver = false;
+            long numSavingsAccount = 0;
+            do
+            {
+                numSavingsAccount = random.NextInt64(1000000000000000, 9999999999999999);
+                checkOver = (usedSavingsAccountNumbers.Contains(numSavingsAccount) && numSavingsAccount != numCheckingAccount) ? true : false;
+            } while (checkOver);
 
             // Random IBAN number
             checkOver = false;
@@ -35,7 +47,7 @@ namespace BankApplication
             IBAN = "BE" + IBAN;
 
             // Add all data to the account  
-            Account account = new Account { AccountNumber = numAccount, IBAN = IBAN, Balance = balance, Name = name, FirstName = firstName };
+            Account account = new Account { CheckingAccountNumber = numCheckingAccount, SavingAccountNumber = numSavingsAccount , CheckingAccBalance = 1000, SavingAccBalance = 1000, IBAN = IBAN, Name = name, FirstName = firstName };
             accounts.Add(account);
             return account;
         }

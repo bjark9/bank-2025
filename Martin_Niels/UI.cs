@@ -30,7 +30,8 @@ while (running)
     {
         case 1:
             // Show account info
-            Console.WriteLine($"Name: {acc.Name}\nFirst name: {acc.FirstName}\nAccount number: {acc.AccountNumber}\nIBAN: {acc.IBAN}\nBalance: {acc.Balance}");
+            long totalBalance = acc.SumOfAllAccountsBalance();
+            Console.WriteLine($"Name: {acc.Name}\nFirst name: {acc.FirstName}\nChecking account number: {acc.CheckingAccountNumber}\nChecking account balance: {acc.CheckingAccBalance}\nSavings account number: {acc.SavingAccountNumber}\nSavings account balance: {acc.SavingAccBalance}\nIBAN: {acc.IBAN}\nTotal balance: {totalBalance}");
             break;
         case 2:
             // Transaction
@@ -47,8 +48,10 @@ while (running)
             }
             Console.WriteLine("With what amount do you want to change your balance?");
             long amount = long.Parse(Console.ReadLine());
-            acc.Transaction(amount,a);
-            Console.WriteLine($"Balance after transaction: {acc.Balance}");
+            Console.WriteLine("On which account do you want to make the transaction (checkings, savings)?");
+            long accType = Int64.Parse(Console.ReadLine());
+            acc.Transaction(amount,accType,a);
+            // Console.WriteLine($"Balance after transaction: {acc.Balance}");
             break;
         case 3:
             running = false; // Leave terminal

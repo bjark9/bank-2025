@@ -1,4 +1,4 @@
-namespace BankApplication
+namespace BankApplication_Cours
 {
     class CurrentAccount : BankApplication_Cours.Account
     {

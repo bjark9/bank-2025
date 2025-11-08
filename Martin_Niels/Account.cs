@@ -64,9 +64,11 @@ namespace BankApplication_Cours
     abstract class Account : IBankAccount
     {
         // Cette classe va être la classe parente dont SavingsAccount et CurrentAccount vont hériter
-        public required string AccNumber { get; set; }
+        public Account(string AccNumber, object Owner) { } // Constructeur qui prends le num et le titulaire
+        public Account(string AccNumber, object Owner, double Balance) {} // Constructeur qui prends num, titulaire et solde
+        public string AccNumber { get; private set; }
         public double Balance { get; private set; }
-        public required BankApplication_Cours.Person Owner { get; set; } // Is an object?
+        public Person Owner { get; private set; } // Owner is an object
     
         public virtual void Withdraw(double amount)
         {

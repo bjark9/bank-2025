@@ -1,7 +1,9 @@
 namespace BankApplication_Cours
 {
-    class CurrentAccount : BankApplication_Cours.Account
+    class CurrentAccount : Account
     {
+        public CurrentAccount(string AccNumber, object Owner):base(AccNumber,Owner) { }
+        public CurrentAccount(string AccNumber, object Owner, double Balance):base(AccNumber,Owner,Balance) {}
         public double CreditLine { get; set; }
         protected override double CalculInterest()
         {

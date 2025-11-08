@@ -2,8 +2,9 @@ namespace BankApplication_Cours
 {
     public class Person
     {
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required DateTime BirthDate { get; set; }
+        public Person(string FirstName, string LastName, DateTime BirthDate) {}
+        public  string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public  DateTime BirthDate { get; private set; }
     }
 }

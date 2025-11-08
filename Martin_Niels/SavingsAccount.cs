@@ -1,10 +1,12 @@
 using BankApplication_Personnel;
 
-namespace BankApplication
+namespace BankApplication_Cours
 {
-    class SavingsAccount : BankApplication_Cours.Account
+    class SavingsAccount : Account
     {
-        public DateTime DateLastWithdraw { get; set; }
+        public SavingsAccount(string AccNumber, object Owner):base(AccNumber,Owner) {} // Constructeur qui prends le num et le titulaire
+        public SavingsAccount(string AccNumber, object Owner, double Balance) : base(AccNumber, Owner, Balance) { } // Constructeur qui prends num, titulaire et solde
+        public DateTime DateLastWithdraw { get; private set; }
         protected override double CalculInterest()  // Need to put protected, bcs if base is protected, override needs to be protected too
                                                     // Public -> Everyone can acces it (any class, any code)
                                                     // Protected -> Only this class and subclasses can acces it

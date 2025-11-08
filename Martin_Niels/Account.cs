@@ -64,19 +64,37 @@ namespace BankApplication_Cours
     abstract class Account : IBankAccount
     {
         // Cette classe va être la classe parente dont SavingsAccount et CurrentAccount vont hériter
-        public Account(string AccNumber, object Owner) { } // Constructeur qui prends le num et le titulaire
-        public Account(string AccNumber, object Owner, double Balance) {} // Constructeur qui prends num, titulaire et solde
-        public string AccNumber { get; private set; }
-        public double Balance { get; private set; }
+        public Account(string accNumber, Person owner) { AccNumber = accNumber; Owner = owner; } // Constructeur qui prends le num et le titulaire
+        public Account(string accNumber, Person owner, double balance) { AccNumber = accNumber; Owner = owner; Balance = balance; } // Constructeur qui prends num, titulaire et solde
+        public string AccNumber { get; private set; } // Property is accessible/readable by everyone, but only modified in within the class
+        public double Balance { get; private set; } // Property is accessible/readable by everyone, but only modified in within the class
         public Person Owner { get; private set; } // Owner is an object
-    
+
         public virtual void Withdraw(double amount)
         {
-            Balance -= amount;
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("Amount cannot be negatif");
+            }
+            else if ((Balance - amount) < 0)
+            {
+                throw new InsufficientBalanceException("You don't have enough money in your bank account.");
+            }
+            else
+            {
+                Balance -= amount;
+            }
         }
         public virtual void Deposit(double amount)
         {
-            Balance += amount;
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("Amount cannot be negatif.");
+            }
+            else
+            {
+                Balance += amount;
+            }
         }
 
         abstract protected double CalculInterest();

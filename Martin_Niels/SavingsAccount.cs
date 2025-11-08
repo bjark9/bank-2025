@@ -4,8 +4,8 @@ namespace BankApplication_Cours
 {
     class SavingsAccount : Account
     {
-        public SavingsAccount(string AccNumber, object Owner):base(AccNumber,Owner) {} // Constructeur qui prends le num et le titulaire
-        public SavingsAccount(string AccNumber, object Owner, double Balance) : base(AccNumber, Owner, Balance) { } // Constructeur qui prends num, titulaire et solde
+        public SavingsAccount(string AccNumber, Person Owner):base(AccNumber,Owner) {} // Constructeur qui prends le num et le titulaire
+        public SavingsAccount(string AccNumber, Person Owner, double Balance) : base(AccNumber, Owner, Balance) { } // Constructeur qui prends num, titulaire et solde
         public DateTime DateLastWithdraw { get; private set; }
         protected override double CalculInterest()  // Need to put protected, bcs if base is protected, override needs to be protected too
                                                     // Public -> Everyone can acces it (any class, any code)

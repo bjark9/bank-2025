@@ -44,11 +44,19 @@ namespace BankApplication_Personnel
 
 namespace BankApplication_Cours
 {
-    abstract class Account // Cette class va être la classe parente dont SavingsAccount et CurrentAccount vont hériter
+    public interface IAccount
     {
+        public double Balance { get; }
+        public void Withdraw(double amount);
+        public void Deposit(double amount);
+    }
+    abstract class Account : IAccount
+    {
+        // Cette classe va être la classe parente dont SavingsAccount et CurrentAccount vont hériter
         public required string AccNumber { get; set; }
         public double Balance { get; private set; }
         public required BankApplication_Cours.Person Owner { get; set; }
+    
         public virtual void Withdraw(double amount)
         {
             Balance -= amount;
@@ -57,6 +65,7 @@ namespace BankApplication_Cours
         {
             Balance += amount;
         }
+
         abstract protected double CalculInterest();
         public void ApplyInterest()
         {

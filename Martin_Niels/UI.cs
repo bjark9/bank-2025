@@ -1,4 +1,4 @@
-using BankApplication;
+using BankApplication_Personnel;
 
 // See https://aka.ms/new-console-template for more information
 /*
@@ -7,7 +7,6 @@ Console.WriteLine(account01); // This writes the Class of the instance. (in this
 Console.WriteLine(account01.CreateAccount("Pierre","Jean")); // This writes the Class of the instance (in this case Account)
 Console.WriteLine(account01.CreateAccount("Martin", "Niels").AccountNumber); // Writes AccountNumber
 */
-// Test
 
 // UI
 Console.WriteLine("What is the name of your bank?");

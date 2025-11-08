@@ -10,7 +10,7 @@ namespace BankApplication
                                                     // Protected -> Only this class and subclasses can acces it
                                                     // Private -> Only class itself can acces it
         {
-            return 0.045; // We don't do the calculations here bcs Balance is set on private, to calculations on Account.ApplyInterest()
+            return 0.045; // We don't do the calculations here bcs Balance is set on private, do calculations on Account.ApplyInterest()
         }
 
     }

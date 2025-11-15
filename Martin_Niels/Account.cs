@@ -102,6 +102,7 @@ namespace BankApplication_Cours
         {
             Balance += CalculInterest();
         }
+
         // EVENTS
         public event Action<object, EventArgs> NegativeBalanceEvent; // Changez type de l'event en utilisant Action<>
         public virtual void OnNegativeBalance()

@@ -56,6 +56,15 @@ namespace BankApplication_Personnel
 
 namespace BankApplication_Cours
 {
+    class AccountEventArgs : EventArgs
+    {
+        public Account Account {get;}
+        public AccountEventArgs(Account account) // Constructor, takes one parameter account and assigns it to the field Account
+        {
+            Account = account;
+        } 
+    }
+
     class Bank
     {
         public readonly Dictionary<string, Account> Accounts;
@@ -64,28 +73,20 @@ namespace BankApplication_Cours
         public void AddAccount(Account account)
         {
             Accounts.Add(account.AccNumber, account); 
+
+            // Subscribe to event
+            account.NegativeBalanceEvent += NegativeBalanceAction;
         }
+    
         public void DeleteAccount(string number)
         {
             Accounts.Remove(number); // remove account by key
         }
-        // Ajouter une méthode qui traitera l'événement <<NegativeBalanceAction>>
-        // Création du delegate + l'event
-        public delegate void NegativeBalanceActionDelegate(object account, EventArgs e);
-        public event NegativeBalanceActionDelegate NegativeBalanceAction;
 
-        // Création de la méthode
-        public virtual void OnNegativeBalanceAction()
+        private void NegativeBalanceAction(object sender, EventArgs e)
         {
-            NegativeBalanceAction?.Invoke(this, EventArgs.Empty);
+            Account account = (Account)sender;
+            Console.WriteLine($"This account {account.AccNumber} has negative balance.");
         }
-        // Call the method when Balance < 0 ?
-
-        // call method for the message
-        public virtual string NegativeBalanceActionMessage(Account account)
-        {
-            return $"This account {account.AccNumber} has negative balance.";
-        }
-        // account.NegativeBalanceAction += NegativeBalanceActionMessage
     }
 }

@@ -33,6 +33,7 @@ namespace BankApplication_Cours
         }
 
         // Déclencher l'événement quand le compte passe en dessous de 0.
+        // Mettre ici pcq spécifique au compte !actuelle!
         public void CheckBalance()
         {
             if (Balance < 0)

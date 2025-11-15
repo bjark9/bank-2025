@@ -69,5 +69,23 @@ namespace BankApplication_Cours
         {
             Accounts.Remove(number); // remove account by key
         }
+        // Ajouter une méthode qui traitera l'événement <<NegativeBalanceAction>>
+        // Création du delegate + l'event
+        public delegate void NegativeBalanceActionDelegate(object account, EventArgs e);
+        public event NegativeBalanceActionDelegate NegativeBalanceAction;
+
+        // Création de la méthode
+        public virtual void OnNegativeBalanceAction()
+        {
+            NegativeBalanceAction?.Invoke(this, EventArgs.Empty);
+        }
+        // Call the method when Balance < 0 ?
+
+        // call method for the message
+        public virtual string NegativeBalanceActionMessage(Account account)
+        {
+            return $"This account {account.AccNumber} has negative balance.";
+        }
+        // account.NegativeBalanceAction += NegativeBalanceActionMessage
     }
 }

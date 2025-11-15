@@ -1,3 +1,4 @@
+using BankApplication_Cours;
 using BankApplication_Personnel;
 
 // See https://aka.ms/new-console-template for more information
@@ -6,7 +7,7 @@ Bank account01 = new Bank { NameBank = "ING" };
 Console.WriteLine(account01); // This writes the Class of the instance. (in this case writes Bank)
 Console.WriteLine(account01.CreateAccount("Pierre","Jean")); // This writes the Class of the instance (in this case Account)
 Console.WriteLine(account01.CreateAccount("Martin", "Niels").AccountNumber); // Writes AccountNumber
-*/
+
 
 // UI
 Console.WriteLine("What is the name of your bank?");
@@ -59,4 +60,16 @@ while (running)
             Console.WriteLine("Invalid choice :/");
             break;
     };
+}
+*/
+try
+{
+    Person person = new Person("Niels", "Martin", new DateTime(2003, 11, 1));
+    CurrentAccount currAcc = new CurrentAccount("123", person);
+    currAcc.CreditLine = -1;
+
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
 }
